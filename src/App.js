@@ -43,22 +43,30 @@ export default function App() {
   }, [open]);
 
   useEffect(() => {
-    if (!open && intervalId.current === null && count > 0) {
-      intervalId.current = setInterval(() => {
-        setCurrentCount(val => Math.max(0, val - 1));
-      }, 1000);
-    }
-
-    return () => {
+    if (!open) {
+      if (intervalId.current === null && currentCount > 0) {
+        const startTime = Math.round(Date.now() / 1000);
+        const countOnStartTime = currentCount;
+        intervalId.current = setInterval(() => {
+          setCurrentCount(val => Math.max(0, startTime + countOnStartTime - Math.round(Date.now() / 1000)));
+        }, 1000);
+      }
+    } else {
       clearCount();
-    };
-  }, [open, count]);
+    }
+  }, [open, currentCount]);
 
   useEffect(() => {
     if (currentCount <= 0) {
       clearCount();
     }
   }, [currentCount]);
+
+  useEffect(() => {
+    () => {
+      clearCount();
+    };
+  }, []);
 
   return (
     <div className="App">
