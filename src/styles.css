@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.stripe {
+  width: 5px;
+  border-radius: 10px;
+  background-color: #ffbb70;
+  margin: 1px;
+}
+
+.stripe.hidden {
+  visibility: hidden;
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background-color: #fffbda;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-label {
+  color: #ffbb70;
+  font-size: 2rem;
+  cursor: default;
+}
+
+.stripes-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.2);
+  margin: 20px auto auto;
+  padding: 0;
+  border: 0;
+}
+
+dialog input {
+  height: 40px;
+  font-size: 1.5rem;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+dialog button {
+  padding: 1rem 2rem;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+}
+
+dialog .submit-btn {
+  background-color: green;
+}
+
+dialog .cancel-btn {
+  background-color: darkred;
+}
+
+.left-label {
+  text-align: right;
+}
+
+.modal-content {
+  padding: 1rem;
+}
