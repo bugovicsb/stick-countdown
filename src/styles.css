@@ -52,8 +52,10 @@ dialog {
 }
 
 dialog input {
+  box-sizing: border-box;
   height: 40px;
   font-size: 1.5rem;
+  width: 100%;
 }
 
 .btn-container {
