@@ -1,6 +1,6 @@
 {
   "name": "Stripe Countdown",
-  "short_name": "StripeCounter",
+  "short_name": "Stripe Countdown",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#fffbda",
