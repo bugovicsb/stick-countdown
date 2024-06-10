@@ -8,10 +8,17 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const inputRef = useRef();
   const intervalId = useRef();
+  const wakeLock = useRef(null);
 
   const clearCount = () => {
     clearInterval(intervalId.current);
     intervalId.current = null;
+
+    if (wakeLock.current) {
+      wakeLock.current.release().then(() => {
+        wakeLock.current = null;
+      });
+    }
   };
 
   const handleSubmit = e => {
@@ -21,6 +28,17 @@ export default function App() {
     setCount(newCount);
     setCurrentCount(newCount);
     setOpen(false);
+  };
+
+  const lockScreen = async () => {
+    if ("wakeLock" in navigator) {
+      // request a wake lock
+      try {
+        wakeLock.current = await navigator.wakeLock.request("screen");
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -50,6 +68,8 @@ export default function App() {
         intervalId.current = setInterval(() => {
           setCurrentCount(val => Math.max(0, startTime + countOnStartTime - Math.round(Date.now() / 1000)));
         }, 1000);
+
+        lockScreen();
       }
     } else {
       clearCount();
