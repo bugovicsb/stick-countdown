@@ -90,7 +90,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="content-container" onClick={() => setOpen(true)}>
+      <div className="content-container" onDoubleClick={() => setOpen(true)}>
         {currentCount > 0 ? (
           <div className="stripes-container">
             {count > 0 &&
@@ -99,7 +99,7 @@ export default function App() {
               ))}
           </div>
         ) : (
-          !open && <span className="start-label">Click to start</span>
+          !open && <span className="start-label">Double click to start</span>
         )}
       </div>
       <Modal isOpen={open} close={() => setOpen(false)}>
