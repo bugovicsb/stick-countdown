@@ -4,7 +4,7 @@ import "./styles.css";
 
 export default function App() {
   const [count, setCount] = useState(0);
-  const [currentCount, setCurrentCount] = useState(count);
+  const [currentCount, setCurrentCount] = useState(null);
   const [open, setOpen] = useState(false);
   const inputRef = useRef();
   const intervalId = useRef();
@@ -62,7 +62,7 @@ export default function App() {
 
   useEffect(() => {
     if (!open) {
-      if (intervalId.current === null && currentCount > 0) {
+      if (intervalId.current === null && currentCount !== null && currentCount > 0) {
         const startTime = Math.round(Date.now() / 1000);
         const countOnStartTime = currentCount;
         intervalId.current = setInterval(() => {
@@ -77,8 +77,13 @@ export default function App() {
   }, [open, currentCount]);
 
   useEffect(() => {
-    if (currentCount <= 0) {
+    if (currentCount !== null && currentCount <= 0) {
       clearCount();
+
+      if ("vibrate" in navigator) {
+        navigator.vibrate(0);
+        navigator.vibrate([200, 100, 200]);
+      }
     }
   }, [currentCount]);
 
@@ -91,7 +96,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="content-container" onDoubleClick={() => setOpen(true)}>
-        {currentCount > 0 ? (
+        {currentCount !== null && currentCount > 0 ? (
           <div className="stripes-container">
             {count > 0 &&
               Array.from(Array(count)).map((item, idx) => (
@@ -106,10 +111,10 @@ export default function App() {
         <div className="modal-content">
           <form formMethod="dialog">
             <div className="left-label">
-              <span>{currentCount} left</span>
+              <span>{currentCount ?? 0} left</span>
             </div>
             <div>
-              <input maxLength={4} min={0} defaultValue={currentCount} ref={inputRef} />
+              <input maxLength={4} min={0} defaultValue={currentCount ?? 0} ref={inputRef} />
             </div>
             <div className="btn-container">
               <button type="button" className="cancel-btn" formMethod="dialog" onClick={() => setOpen(false)}>

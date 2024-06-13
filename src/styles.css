@@ -33,6 +33,7 @@ body {
   color: #ffbb70;
   font-size: 2rem;
   cursor: default;
+  user-select: none;
 }
 
 .stripes-container {
