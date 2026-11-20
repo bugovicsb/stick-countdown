@@ -126,12 +126,8 @@ export default function App() {
           <div className="timer-view">
             <div className="count-summary">
               <div className="summary-row">
-                <b>{currentCount}</b>
-                <span>{currentCount === 1 ? "stick remaining" : "sticks remaining"}</span>
-              </div>
-              <div className="summary-row">
                 <b>{formatTime(currentCount)}</b>
-                <span>time remaining</span>
+                <span><em>{currentCount}</em> {currentCount === 1 ? "stick remaining" : "sticks remaining"}</span>
               </div>
             </div>
             <div className="stripes-container" style={stickGrid} aria-label={`${currentCount} sticks remaining`}>
